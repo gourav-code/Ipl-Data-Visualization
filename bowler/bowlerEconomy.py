@@ -188,7 +188,7 @@ def update_bower_histogram_graph(bowler_name, selected_years):
                 textfont = dict(
                     color = 'white'
                 ),
-                name = 'Economy by '+str(bowler_name),
+                name = 'Number of matches by '+str(bowler_name),
                 marker = dict(color = 'blue'),
                 hoverinfo = 'text',
                 hovertext =
