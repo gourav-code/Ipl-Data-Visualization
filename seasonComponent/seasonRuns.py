@@ -5,47 +5,16 @@ import pandas as pd
 import plotly.graph_objs as go
 
 df2008 = pd.read_csv("csvFiles/2008.csv")
-data2008 = df2008.groupby('batsman')['batsman_runs'].sum().reset_index()
-
 df2009 = pd.read_csv("csvFiles/2009.csv")
-data2009 = df2009.groupby('batsman')['batsman_runs'].sum().reset_index()
-
 df2010 = pd.read_csv("csvFiles/2010.csv")
-data2010 = df2010.groupby('batsman')['batsman_runs'].sum().reset_index()
-
 df2011 = pd.read_csv("csvFiles/2011.csv")
-data2011 = df2011.groupby('batsman')['batsman_runs'].sum().reset_index()
-
 df2012 = pd.read_csv("csvFiles/2012.csv")
-data2012 = df2012.groupby('batsman')['batsman_runs'].sum().reset_index()
-
 df2013 = pd.read_csv("csvFiles/2013.csv")
-data2013 = df2013.groupby('batsman')['batsman_runs'].sum().reset_index()
-
 df2014 = pd.read_csv("csvFiles/2014.csv")
-data2014 = df2014.groupby('batsman')['batsman_runs'].sum().reset_index()
-
 df2015 = pd.read_csv("csvFiles/2015.csv")
-data2015 = df2015.groupby('batsman')['batsman_runs'].sum().reset_index()
-
 df2016 = pd.read_csv("csvFiles/2016.csv")
-data2016 = df2016.groupby('batsman')['batsman_runs'].sum().reset_index()
-
 df2017 = pd.read_csv("csvFiles/2017.csv")
-data2017 = df2017.groupby('batsman')['batsman_runs'].sum().reset_index()
 
-data_dict = {
-    2008:data2008,
-    2009:data2009,
-    2010:data2010,
-    2011:data2011,
-    2012:data2012,
-    2013:data2013,
-    2014:data2014,
-    2015:data2015,
-    2016:data2016,
-    2017:data2017
-}
 df_dict = {
     2008:df2008,
     2009:df2009,
