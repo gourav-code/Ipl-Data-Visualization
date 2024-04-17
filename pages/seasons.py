@@ -24,4 +24,4 @@ layout = dbc.Container([
             IPLRunnerBar
         ])
     ])
-])
+], style={"padding-top": "40px"})
