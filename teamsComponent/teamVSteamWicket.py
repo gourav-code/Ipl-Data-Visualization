@@ -37,9 +37,9 @@ WicketTakenTeams = html.Div(className="card-chart-container col-lg-15 md-1 sm-1"
 )
 
 def teamVSteamWicketCompare(teamName1, teamName2):
-    df = data.query(f"bowling_team == '{teamName1}'").reset_index()
+    df = data.query(f"batting_team == '{teamName2}' and bowling_team == '{teamName1}'").reset_index()
     df.loc[:, 'Wicket']=1
-    df1 = data.query(f"bowling_team == '{teamName2}'").reset_index()
+    df1 = data.query(f"batting_team == '{teamName1}' and bowling_team == '{teamName2}'").reset_index()
     df1.loc[:, 'Wicket']=1
     runs1 = df.groupby("over")['Wicket'].sum().reset_index()
     runs2 = df1.groupby("over")['Wicket'].sum().reset_index()
@@ -53,6 +53,7 @@ def teamVSteamWicketCompare(teamName1, teamName2):
 
     fig.update_xaxes(title='Overs')
     fig.update_yaxes(title='Wicket taken')
+    fig.for_each_trace(lambda t: t.update(name=teamName1 if t.name == 'Wicket' else teamName2))
     fig.update_traces(
         hovertemplate='<b>Overs: %{x}</b><br>' +
                       f'{teamName1}'+': %{customdata[0]}<br>' +

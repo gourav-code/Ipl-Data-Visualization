@@ -64,6 +64,7 @@ df_dict = {
 
 slider = html.Div([
         html.Div([html.H1("Bowler economy per year")]),
+        html.Div(id='output1-heading'),
         html.Div([html.Div([
             # bowler dropdown
             html.P('Select Bowler:', className = 'fix_label', style = {'color': 'white'}),
@@ -259,5 +260,25 @@ def update_bower_histogram_graph(bowler_name, selected_years):
     }
     return return_var
 
+@callback(
+    Output('output1-heading', 'children'),
+    [Input('bowler_name_id', 'value')]
+)
+def bowler_relation(bowlerName):
+    df1 = df.query(f"bowler == '{bowlerName}'").reset_index()
+    condition = "not (dismissal_kind == 'retired_hurt' or dismissal_kind == 'run out' or dismissal_kind.isna())"
+    dataBowler = df1.query(condition)  
+    dataBowler.loc[:, 'Wicket'] = 1
+    tmp = dataBowler.groupby('batsman')['Wicket'].sum().reset_index()
+    index = tmp['Wicket'].idxmax()
+    max_wicket_row = tmp.loc[index]
 
+    #strike rate
+    batsmanName = max_wicket_row['batsman']
+    temp = df1.query(f"batsman == '{batsmanName}'").reset_index()
+    totalRun = temp['total_runs'].sum()
+    totalBall = temp.shape[0]
+    
+    input_text = f"{bowlerName} has taken wicket of {max_wicket_row['batsman']} wicket, about {max_wicket_row['Wicket']} times and with strike rate of {round((totalRun*100)/totalBall,2)} and runs {totalRun}"
 
+    return html.H2(input_text)

@@ -5,7 +5,7 @@ import dash_bootstrap_components as dbc
 from dash.dependencies import Input, Output, State
 import dash_loading_spinners as dls
 from dash import callback
-import plotly.graph_objects as go
+
 
 TeamHeading = html.Div(className="card-chart-container col-lg-15 ",
                     children=[
@@ -102,7 +102,7 @@ WCteam2 = html.Div(className="col-lg-3 col-md-3 col-sm-3 card-chart-container", 
                         children=[
                             dbc.Select(
                                 id="query-team2",
-                                value="Chennai Super Kings",
+                                value="Mumbai Indians",
                                 options=[
                                     {"label": l, "value": l} for l in team_name_dict.keys()
                                 ],

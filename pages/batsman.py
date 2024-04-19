@@ -67,6 +67,7 @@ df_dict = {
 
 layout = html.Div([
     html.Div([html.H1("Batsman runs per year")]),
+    html.Div(id='output-heading'),
     html.Div([html.Div([
             # batsman dropdown
             html.P('Select Batsman:', className = 'fix_label', style = {'color': 'white'}),
@@ -225,3 +226,27 @@ def update_histogram_graph(batsman_name, selected_years):
                     ),
                 )
     }
+
+@callback(
+    Output('output-heading', 'children'),
+    [Input('batsman_name_id', 'value')]
+)
+def batsman_bowler_relation(batsmanName):
+    df1 = df.query(f"batsman == '{batsmanName}'").reset_index()
+    temp = df1.groupby('bowler')['total_runs'].sum().reset_index()
+    index = temp['total_runs'].idxmax()
+    max_run_row = temp.loc[index]
+
+    df1.loc[:,'balls'] = 1
+
+    temp1 = df1.groupby('bowler')['balls'].sum().reset_index()
+    index_ball = temp1['balls'].idxmax()
+    max_ball_row = temp1.loc[index_ball]
+
+    # strike rate
+    totalRun = df1['total_runs'].sum()
+    totalBall = df1.shape[0]
+
+    input_text = f"{batsmanName} played {max_ball_row['bowler']}, {max_ball_row['balls']} balls exact and made most runs of {max_run_row['bowler']}, {max_run_row['total_runs']} runs exact and {batsmanName} has strike rate of {round((totalRun*100)/totalBall,2)}"
+    return html.H2(input_text)
+

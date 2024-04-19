@@ -52,8 +52,8 @@ RunsscoredTeams = html.Div(className="card-chart-container col-lg-15 md-1 sm-1",
 )
 
 def teamVSteamRunCompare(teamName1, teamName2):
-    df = data.query(f"batting_team == '{teamName1}'").reset_index()
-    df1 = data.query(f"batting_team == '{teamName2}'").reset_index()
+    df = data.query(f"batting_team == '{teamName1}' and bowling_team == '{teamName2}'").reset_index()
+    df1 = data.query(f"batting_team == '{teamName2}' and bowling_team == '{teamName1}'").reset_index()
     runs1 = df.groupby("over")['total_runs'].sum().reset_index()
     runs2 = df1.groupby("over")['total_runs'].sum().reset_index()
     runs2.rename(columns={'total_runs': 'total_runs1'}, inplace=True)
@@ -66,6 +66,7 @@ def teamVSteamRunCompare(teamName1, teamName2):
 
     fig.update_xaxes(title='Overs')
     fig.update_yaxes(title='Runs scored')
+    fig.for_each_trace(lambda t: t.update(name=teamName1 if t.name == 'total_runs' else teamName2))
     fig.update_traces(
         hovertemplate='<b>Overs: %{x}</b><br>' +
                       f'{teamName1}'+': %{customdata[0]}<br>' +
