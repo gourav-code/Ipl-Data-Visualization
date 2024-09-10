@@ -25,6 +25,8 @@ headTOhead = html.Div([
 )
 
 def headToheadstat(teamName1, teamName2):
+    if teamName1 == teamName2:
+        raise Exception('Both team Name can not be same')
     df = data.query(f"batting_team == '{teamName1}'").reset_index()
     df1 = data.query(f"batting_team == '{teamName2}'").reset_index()
     runs1 = df.groupby("match_id")['total_runs'].sum().reset_index()
@@ -61,6 +63,8 @@ def headToheadstat(teamName1, teamName2):
 )
 
 def headToheadWinpie(teamName1, teamName2):
+    if teamName1 == teamName2:
+        raise Exception('Both team Name can not be same')
     df = pd.read_csv("csvFiles/result.csv")
     tmp = df.query(f"Team == '{teamName1}'").reset_index()
     temp = df.query(f"Team == '{teamName2}'").reset_index()

@@ -28,7 +28,6 @@ fig = px.scatter_geo(
     lat='Latitude',
     lon='Longitude',
     hover_name='City',
-    scope='asia',  # Set map scope to Asia (India will be centered)
     title='Indian Cities',
     center={'lat':20.5937, 'lon': 78.9629},
     width=1500,
@@ -36,20 +35,29 @@ fig = px.scatter_geo(
     hover_data=['City', 'toss-win-bat-percentage', 'toss-win-match-win-percentage']
     
 )
-
-# Customize map layout (optional)
 fig.update_geos(
     projection_type='natural earth',  # Set map projection
     showcountries=True,  # Show country borders
     countrycolor='gray',  # Country border color
     showland=True,  # Show land masses
-    landcolor='lightgray'  # Land color
+    showocean=True,
+    landcolor='lightgray',  # Land color
+    center={'lat': 20.5937, 'lon': 78.9629},
+    lataxis_range=[5, 40],            # Latitude range for zooming on India
+    lonaxis_range=[65, 100] 
+)
+# Add country highlighting (India)
+fig.add_trace(
+    px.scatter_geo(df_cities).update_traces(marker=dict(size=10, color='red')).data[0]
 )
 
 layout = html.Div([
     html.H1('Indian Cities Map'),
     dcc.Graph(
         id='indian-map',
-        figure=fig
+        figure=fig,
+        style={'backgroundColor':'blue'}
     )
-])
+    ],
+    style={'width': '49%', 'display': 'inline-block'}
+)

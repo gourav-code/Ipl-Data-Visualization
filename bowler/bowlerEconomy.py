@@ -129,7 +129,7 @@ def update_bower_histogram_graph(bowler_name, selected_years):
                 fix_parameter = int(temp)
         number_overs_list.append(number_over)
         #runs_conceded or economy
-        runs_byBowler = bowlerPerform.groupby("match_id")['wide_runs', 'noball_runs', 'batsman_runs'].sum()
+        runs_byBowler = bowlerPerform.groupby("match_id")[['wide_runs', 'noball_runs', 'batsman_runs']].sum()
         all_runs_byBowler_in_matches = runs_byBowler['wide_runs']+runs_byBowler['noball_runs']+runs_byBowler['batsman_runs']
         all_runs_byBowler = all_runs_byBowler_in_matches.sum()
         runs_conceded_list.append(all_runs_byBowler)

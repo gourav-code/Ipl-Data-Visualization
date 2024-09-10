@@ -12,8 +12,7 @@ from seasonComponent.iplWinnerRunnerUP import WCWinnersBar, IPLRunnerBar
 dash.register_page(__name__)
 
 layout = dbc.Container([
-    dbc.Row([
-        WCHeaderCard,
+    dbc.Row([WCHeaderCard]),
         dbc.Col([
             season_run,
             WinnerAndRunnerBar,
@@ -23,5 +22,4 @@ layout = dbc.Container([
             WCWinnersBar,
             IPLRunnerBar
         ])
-    ])
-], style={"padding-top": "40px"})
+], fluid = True)

@@ -73,7 +73,7 @@ WCteam1image = html.Div(className="col-lg-3 col-md-3 col-sm-3 card-chart-contain
                                 id="team-flag1",
                                 src = '',
                                 style={
-                                    "width": "50em", 'margin-top':'30px', 'margin-bottom':'20px', 'margin-left':'5px',
+                                    "height": "15em","width": "15em", 'margin-top':'30px', 'margin-bottom':'20px', 'margin-left':'5px',
                                     "box-shadow": "2px 2px 6px 0 rgb(67 89 113 / 20%)"}
                                 ),
                         debounce=0
@@ -91,6 +91,7 @@ WCteam1image = html.Div(className="col-lg-3 col-md-3 col-sm-3 card-chart-contain
     [Input("query-team1", "value")]
 )
 def insert_image(teamName):
+    firstTeamName = teamName
     team_logo = f"assets/img/{team_name_dict[teamName]}.svg"
     return team_logo
 
@@ -126,7 +127,7 @@ WCteam2image = html.Div(className="col-lg-3 col-md-3 col-sm-3 card-chart-contain
                                 id="team-flag2",
                                 src = '',
                                 style={
-                                    "width": "50em", 'margin-top':'30px', 'margin-bottom':'20px', 'margin-left':'5px',
+                                    "height": "15em", "width": "15em", 'margin-top':'30px', 'margin-bottom':'20px', 'margin-left':'5px',
                                     "box-shadow": "2px 2px 6px 0 rgb(67 89 113 / 20%)"}
                                 ),
                         debounce=0
@@ -148,3 +149,12 @@ def insert_image1(teamName):
 
     return team_logo
 
+# Parent container to hold both teams' components
+WCteamsContainer = html.Div(
+    className="d-flex justify-content-center",  # Flexbox to align side by side
+    style={"display": "flex", "flex-wrap": "wrap", "justify-content": "center"},
+    children=[
+        html.Div(children=[WCteam1, WCteam1image], style={"flex": "1", "margin": "10px"}),  # First team and image
+        html.Div(children=[WCteam2, WCteam2image], style={"flex": "1", "margin": "10px"}),  # Second team and image
+    ]
+)

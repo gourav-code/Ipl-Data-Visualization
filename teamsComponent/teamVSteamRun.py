@@ -52,6 +52,9 @@ RunsscoredTeams = html.Div(className="card-chart-container col-lg-15 md-1 sm-1",
 )
 
 def teamVSteamRunCompare(teamName1, teamName2):
+    if teamName1 == teamName2:
+        raise Exception('Both team Name can not be same')
+        
     df = data.query(f"batting_team == '{teamName1}' and bowling_team == '{teamName2}'").reset_index()
     df1 = data.query(f"batting_team == '{teamName2}' and bowling_team == '{teamName1}'").reset_index()
     runs1 = df.groupby("over")['total_runs'].sum().reset_index()
