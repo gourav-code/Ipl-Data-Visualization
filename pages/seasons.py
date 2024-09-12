@@ -12,8 +12,8 @@ from seasonComponent.iplWinnerRunnerUP import WCWinnersBar, IPLRunnerBar
 dash.register_page(__name__)
 
 layout = dbc.Container([
-    dbc.Row([WCHeaderCard]),
         dbc.Col([
+            WCHeaderCard,
             season_run,
             WinnerAndRunnerBar,
             WinnerAndRunnerWicketsBar,
