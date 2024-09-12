@@ -4,6 +4,7 @@ from dash.dependencies import Input, Output
 import pandas as pd
 import plotly.graph_objs as go
 
+
 app = Dash(__name__, use_pages=True)
 
 app.layout = html.Div([html.Div([
